@@ -1,0 +1,87 @@
+import requests
+import json
+from urllib import request
+import time
+from email_validator import validate_email, EmailNotValidError
+
+def main ():
+
+    myurl = requests.get("http://demo7130536.mockable.io/final-contacts-100")
+    convertir = myurl.text
+    
+
+    #creación del menu
+    print ("\n")
+    print ("###### MENÚ ######")
+    
+    input_menu = int(input(" 1. Agregar Contactos\n 2. Buscar Contactos\n 3. Ver contactos\n 4. Borrar Contactos\n 5. Llamar Contactos\n 6. Enviar Mensaje a Contactos\n 7. Enviar Mail a Contactos\n 8. Exportar Contactos\n"))
+    if input_menu == 1: #Agregar Contacto
+        nombre_contacto = input("Ingrese el nombre del contacto\n")
+        numero_contacto = int(input("Ingrese el numero de telefono del contacto\n"))
+        email_contacto = input("Ingrese el email de el contacto\n")
+        try:
+            v = validate_email(email_contacto) 
+            email_contacto = v["email"] 
+            print("Email Valido")
+    
+        except EmailNotValidError as e:
+            print(str(e))
+
+        nuevo_contacto_creado = (f"Nombre : {nombre_contacto}, Telefono : {numero_contacto}, Email : {email_contacto}")
+        primeraletra = nombre_contacto[0]
+        for i in myurl.text:
+            if i==primeraletra:
+                for persona in myurl.text[1]:
+                    ##myurl.text[1]=nuevo_contacto_creado
+                    print(persona)
+
+    if input_menu == 2: #Buscar Contacto
+        input("H")
+    if input_menu == 3: # Ver Contacto
+            numerodecontacto = 0
+            for i in convertir:
+                print(i+":")
+                print("=======================")
+                for persona in convertir[1]:
+                    numerodecontacto+=1
+                    print(f"{numerodecontacto}. {persona}")
+                print("=======================")
+                print("\n")
+            filtro_primeraletra = input("Ingrese la letra para filtrar el contacto.\n")
+            for persona in myurl.text[filtro_primeraletra]:
+                numero_contacto+=1
+                print("================")
+                print(f"{numero_contacto}.{persona}")
+                print("================")
+    if input_menu == 4: #Borrar Contacto 
+        input("H")
+    if input_menu == 5: #Llamar Contacto
+        llamando_persona = input("Porfavor ingrese el nombre de la persona a la que desea llamar : ")
+        print(f"Llamando a {llamando_persona}...")
+    if input_menu == 6: #Enviar Mensaje a Contacto 
+        correo_enviar_mensaje = input ("Numero de Telefono :")
+        enviar_mensaje = input ("Mensaje : ")
+        print("Enviando...")
+        time.sleep(2)
+        print("Mensaje Enviado Exitosa Mente")
+    if input_menu == 7: #Enviar Mail a contacto
+        enviando_correo = input("Email: ")
+        print("Verificando Correo...")
+        time.sleep(2)
+        try:
+            v = validate_email(enviando_correo) 
+            enviando_correo = v["email"] 
+            print("Email Verificado")
+
+            mensaje_correo = input("Mensaje:")
+            print("Enviando...")
+            time.sleep(2)
+            print("Email Enviado")
+
+    
+        except EmailNotValidError as e:
+            print(str(e))
+    elif input_menu == 8: #Exportar Contacto
+        input("H")
+
+main ()
