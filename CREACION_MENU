@@ -1,1 +1,39 @@
+import requests
+import json
 
+
+def main ():
+
+    #creación del menu
+    print ()
+    print ("      ###### MENÚ ######")
+    imput_menu = input ("""
+    1. Agregar contactos
+    2. Buscar contactos
+    3. Ver contactos
+    4. Borrar contactos
+    5. Llamar contactos
+    6. Enviar mensaje a un contacto
+    7. Enviar un correo a un contacto
+    8. Exportar contacto
+    """)
+
+    if input_menu == 1:
+        #codigo
+    if input_menu == 2:
+        #codigo
+    if input_menu == 3:
+        #codigo
+    if input_menu == 4:
+        #codigo 
+    if input_menu == 5:
+        #codigo
+    if input_menu == 6:
+        #codigo
+    if input_menu == 7:
+        #codigo
+    elif input_menu == 8:
+        #codigo
+
+
+main ()
