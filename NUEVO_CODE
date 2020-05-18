@@ -1,0 +1,70 @@
+#Final Code 
+import json
+import requests
+import time
+from email_validator import validate_email, EmailNotValidError
+
+def main():
+
+    exit = False 
+    contacts = {}
+
+    urlget = requests.get('http://demo7130536.mockable.io/final-contacts-100')
+    open('contacts.json', 'wb').write(urlget.content)
+    with open('contacts.json','r')as JSON:
+        contacts = json.load(JSON)
+
+    input_menu = int(input(" 1. Agregar Contactos\n 2. Buscar Contactos\n 3. Ver contactos\n 4. Borrar Contactos\n 5. Llamar Contactos\n 6. Enviar Mensaje a Contactos\n 7. Enviar Mail a Contactos\n 8. Exportar Contactos\n"))
+
+    if input_menu == 1:
+        nombre_del_contacto = input("Nombre del contacto: ")
+        numero_del_contacto = input("Numero del contacto: ")
+        email_del_contacto = input("Email del contacto: ")
+    
+        def write_json(data, filename="contacts.json"):
+            with open(filename, "w") as f:
+                json.dump(data, f, indent=4)
+                
+        with open ("contacts.json") as json_file:
+            data = json.load(json_file)
+            temp = data["telefono"]
+            y = {"telefono": numero_del_contacto}
+            temp.append(y)
+        write_json(data)
+
+    if input_menu == 2:
+        input("Ingrese el nombre de la persona que desea buscar: ")
+
+    if input_menu == 3:
+        print(contacts)
+
+    if input_menu == 5: #Llamar Contacto
+        llamando_persona = input("Porfavor ingrese el nombre de la persona a la que desea llamar : ")
+        print(f"Llamando a {llamando_persona}...")
+    if input_menu == 6: #Enviar Mensaje a Contacto 
+        correo_enviar_mensaje = input ("Numero de Telefono :")
+        enviar_mensaje = input ("Mensaje : ")
+        print("Enviando...")
+        time.sleep(2)
+        print("Mensaje Enviado Exitosa Mente")
+    if input_menu == 7: #Enviar Mail a contacto
+        enviando_correo = input("Email: ")
+        print("Verificando Correo...")
+        time.sleep(2)
+        try:
+            v = validate_email(enviando_correo) 
+            enviando_correo = v["email"] 
+            print("Email Verificado")
+
+            mensaje_correo = input("Mensaje:")
+            print("Enviando...")
+            time.sleep(2)
+            print("Email Enviado")
+
+
+        except EmailNotValidError as e:
+            print(str(e))
+    elif input_menu == 8: #Exportar Contacto
+        input("H")
+
+main()
